@@ -1,0 +1,315 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 18, 18, 18;
+  --background-end-rgb: 10, 10, 10;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-start-rgb));
+  -webkit-tap-highlight-color: transparent;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Touch Animation */
+.touch-ripple {
+  @apply relative overflow-hidden;
+}
+
+.touch-ripple::after {
+  content: '';
+  @apply absolute block bg-white opacity-0 rounded-full;
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+  top: var(--y);
+  left: var(--x);
+  width: var(--size);
+  height: var(--size);
+  transform-origin: center;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Animations */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Cart animations */
+@keyframes itemEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cart-item-enter {
+  animation: itemEntrance 0.3s ease-out forwards;
+}
+
+.cart-item-enter:nth-child(1) { animation-delay: 0.05s; }
+.cart-item-enter:nth-child(2) { animation-delay: 0.1s; }
+.cart-item-enter:nth-child(3) { animation-delay: 0.15s; }
+.cart-item-enter:nth-child(4) { animation-delay: 0.2s; }
+.cart-item-enter:nth-child(5) { animation-delay: 0.25s; }
+.cart-item-enter:nth-child(6) { animation-delay: 0.3s; }
+.cart-item-enter:nth-child(7) { animation-delay: 0.35s; }
+.cart-item-enter:nth-child(8) { animation-delay: 0.4s; }
+.cart-item-enter:nth-child(9) { animation-delay: 0.45s; }
+.cart-item-enter:nth-child(10) { animation-delay: 0.5s; }
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+  40% { transform: translateX(5px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(3px); }
+}
+
+.cart-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Product Details */
+.product-detail-enter {
+  transform: translateY(100%);
+}
+
+.product-detail-enter-active {
+  transform: translateY(0);
+  transition: transform 300ms;
+}
+
+.product-detail-exit {
+  transform: translateY(0);
+}
+
+.product-detail-exit-active {
+  transform: translateY(100%);
+  transition: transform 300ms;
+}
+
+/* Section animations */
+@keyframes sectionHighlight {
+  0% { background-color: rgba(255, 222, 89, 0.2); }
+  50% { background-color: rgba(255, 222, 89, 0.1); }
+  100% { background-color: rgba(255, 222, 89, 0); }
+}
+
+.section-highlight {
+  animation: sectionHighlight 1.5s ease-out forwards;
+}
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Category button animations */
+@keyframes categoryPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.category-pulse {
+  animation: categoryPulse 0.5s ease-in-out;
+}
+
+/* Cart bounce animation */
+@keyframes cartBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+.cart-bounce {
+  animation: cartBounce 0.3s ease-in-out;
+}
+
+/* Bee Animation for Loading */
+.bee-container {
+  position: relative;
+  display: flex;
+  background: transparent;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+}
+
+.bee {
+  position: relative;
+  margin: auto;
+  align-self: center;
+  width: 50px;
+  height: 50px;
+  animation: to-fly 0.4s infinite;
+}
+
+@keyframes to-fly {
+  50% {
+    transform: translateY(-3px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.bee-body {
+  position: relative;
+  width: 40px;
+  height: 18px;
+  border: 4px solid #FBC02D;
+  background: #FFEB3B;
+  border-radius: 20px;
+  perspective: 2500px;
+  z-index: 99;
+}
+
+.bee-body:before, .bee-body:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.bee-body:before {
+  right: 100%;
+  top: 3px;
+  border-top: 6px solid transparent;
+  border-right: 13px solid #FBC02D;
+  border-bottom: 6px solid transparent;
+}
+
+.bee-body:after {
+  right: 97%;
+  top: 6px;
+  border-top: 3px solid transparent;
+  border-right: 6px solid #FFEB3B;
+  border-bottom: 3px solid transparent;
+}
+
+.bee-line {
+  position: relative;
+  left: 10px;
+  height: 18px;
+  width: 18px;
+  background: #FBC02D;
+}
+
+.bee-wing-right, .bee-wing-left {
+  position: absolute;
+  top: -18px;
+  left: 12px;
+  width: 15px;
+  height: 15px;
+  background: #FFEB3B;
+  border: 4px solid #FBC02D;
+  border-radius: 100%;
+}
+
+.bee-wing-right {
+  left: 15px;
+  transform: skew(-20deg);
+  animation: wing-beat-right 0.25s infinite;
+  transform-origin: bottom;
+  z-index: 9;
+}
+
+.bee-wing-left {
+  transform: skew(20deg);
+  animation: wing-beat-left 0.25s infinite;
+  transform-origin: bottom;
+  z-index: 999;
+}
+
+@keyframes wing-beat-right {
+  50% {
+    transform: rotateX(60deg) skew(-20deg) rotateZ(25deg);
+  }
+  100% {
+    transform: rotateX(0) skew(-20deg);
+  }
+}
+
+@keyframes wing-beat-left {
+  50% {
+    transform: rotateX(-65deg) skew(20deg) rotateZ(-10deg);
+  }
+  100% {
+    transform: rotateX(0) skew(20deg);
+  }
+}
+
+.bee-path {
+  display: inline-block;
+  position: relative;
+  top: -24px;
+  left: -90px;
+  width: 140px;
+  animation: pollen 0.14s infinite;
+}
+
+.bee-pollen {
+  display: inline-block;
+  margin: 0;
+  width: 3px;
+  height: 3px;
+  background: #FBC02D;
+  border-radius: 100%;
+}
+
+@keyframes pollen {
+  0% {
+    left: -90px;
+  }
+  100% {
+    left: -95px;
+  }
+} 
