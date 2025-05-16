@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import { IoCloseOutline } from 'react-icons/io5';
 import { translations } from '../data/translations';
-import { useState } from 'react';
 
 export default function LanguageSelector({ onSelectLanguage, onClose }) {
   const languages = [
@@ -15,16 +14,6 @@ export default function LanguageSelector({ onSelectLanguage, onClose }) {
     { code: 'ru', name: 'Русский', flag: '/images/flags/russia.webp' },
     { code: 'uz', name: 'Uzbek', flag: '/images/flags/uzbek.webp' },
   ];
-
-  const [selectedLang, setSelectedLang] = useState('en');
-
-  const handleSelectLanguage = (langCode) => {
-    setSelectedLang(langCode);
-  };
-
-  const confirmLanguage = () => {
-    onSelectLanguage(selectedLang);
-  };
 
   return (
     <div className="fixed inset-0 bg-primary z-50 flex flex-col items-center p-6">
@@ -40,10 +29,8 @@ export default function LanguageSelector({ onSelectLanguage, onClose }) {
           {languages.map((lang) => (
             <button
               key={lang.code}
-              className={`bg-secondary rounded-lg p-4 flex flex-col items-center justify-center h-32 ${
-                selectedLang === lang.code ? 'ring-4 ring-[#FFB300]' : ''
-              }`}
-              onClick={() => handleSelectLanguage(lang.code)}
+              className="bg-secondary rounded-lg p-4 flex flex-col items-center justify-center h-32 hover:ring-4 hover:ring-[#FFB300] transition-all duration-200"
+              onClick={() => onSelectLanguage(lang.code)}
             >
               <div className="w-24 h-14 relative mb-4">
                 <Image
@@ -57,13 +44,6 @@ export default function LanguageSelector({ onSelectLanguage, onClose }) {
             </button>
           ))}
         </div>
-        
-        <button 
-          onClick={confirmLanguage} 
-          className="w-full mt-10 py-4 bg-[#FFB300] rounded-lg text-xl font-semibold"
-        >
-          {translations.en.language.confirm}
-        </button>
       </div>
     </div>
   );
